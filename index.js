@@ -1,10 +1,9 @@
 const express = require("express");
 const app = express();
+const path = require('path');
 
 const connectDb = require('./db.js');
 
-//routes
-const authRoutes = require("./routes/authRoute.js");
 
 //start mongoose
 connectDb();
@@ -15,12 +14,25 @@ app.use(express.json());
 // Middleware for parsing URL-encoded data
 app.use(express.urlencoded({ extended: false }));
 
+//pug middleware
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// Import and use the render routes
+const renderRoutes = require('./routes/render.js');
+app.use(renderRoutes);
+
 //Authentication Route
+const authRoutes = require("./routes/authRoute.js");
 app.use('/auth', authRoutes);
 
 //home path
 app.get('/', (req, res) => {
-  res.send("Welcome to AI-Powered Book Recommendation System");
+  const pageTitle = 'Home Page';
+  const welcomeMessage = 'Welcome to our website!';
+  
+  // Render the 'home.pug' template with the provided data
+  res.render('home', { pageTitle, welcomeMessage });
 });
 
 // Error handling middleware

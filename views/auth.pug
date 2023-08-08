@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-6.mx-auto
+        h2 Login
+        form(action="/auth/login", method="POST")
+          .form-group
+            label(for="username") Username
+            input.form-control(type="text", id="username", name="username", required)
+          .form-group
+            label(for="password") Password
+            input.form-control(type="password", id="password", name="password", required)
+          button.btn.btn-primary(type="submit") Login
+    
+    .row.mt-5
+      .col-md-6.mx-auto
+        h2 Register
+        form(action="/auth/register", method="POST")
+          .form-group
+            label(for="reg-username") Username
+            input.form-control(type="text", id="reg-username", name="username", required)
+          .form-group
+            label(for="reg-email") Email
+            input.form-control(type="email", id="reg-email", name="email", required)
+          .form-group
+            label(for="reg-password") Password
+            input.form-control(type="password", id="reg-password", name="password", required)
+          button.btn.btn-primary(type="submit") Register

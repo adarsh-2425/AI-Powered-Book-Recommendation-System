@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Login - Book Recommendation System
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container.mt-4
+      .row
+        .col-md-6.mx-auto
+          h2 Login
+          form(action="/auth/login", method="POST")
+            .form-group
+              label(for="username") Username
+              input.form-control(type="text", id="username", name="username", required)
+            .form-group
+              label(for="password") Password
+              input.form-control(type="password", id="password", name="password", required)
+            button.btn.btn-primary(type="submit") Login
