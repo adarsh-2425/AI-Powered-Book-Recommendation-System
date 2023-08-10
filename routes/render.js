@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bookController = require('../controllers/bookController');
 
 // Render the home page
 router.get('/', (req, res) => {
@@ -16,7 +17,13 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-//update books
+// Render the registration form
+router.get('/create', (req, res) => {
+  res.render('createBook');
+});
+
+//Route to fetch the book and render the updatebook pug template
+router.get('/update/:id', bookController.renderForUpdate);
 
 
 

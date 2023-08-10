@@ -20,11 +20,15 @@ const bookSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: function () {
+      const indiaTimezoneOffset = 330; // India time zone offset in minutes
+      const utcTimestamp = Date.now();
+      const indiaTimestamp = utcTimestamp + indiaTimezoneOffset * 60 * 1000;
+      return new Date(indiaTimestamp);
+    },
   },
 });
 

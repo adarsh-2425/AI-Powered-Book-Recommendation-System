@@ -33,7 +33,8 @@ exports.getBook = async (req, res) => {
   }
 }
 
-// Create Book
+
+// Create Book Logic
 exports.createBook = async (req, res) => {
   try {
     // const userId = req.user._id || "";
@@ -57,7 +58,23 @@ exports.createBook = async (req, res) => {
   }
 }
 
-// Update Book
+// Update Book Pug Rendering
+exports.renderForUpdate = async (req, res) => {
+  try {
+    //console.log('update route accessed');
+    const book = await Book.findById(req.params.id);
+    if (!book) {
+      return res.status(404).send('Book not found');
+    }
+
+    res.render('updateBook', { book });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({message: 'Server Error'});
+  }
+}
+
+// Update Book Logic
 exports.updateBook = async (req, res) => {
   try {
     const { id } = req.params;
