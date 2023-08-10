@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
 
 const connectDb = require('./db.js');
 
@@ -14,6 +15,9 @@ app.use(express.json());
 // Middleware for parsing URL-encoded data
 app.use(express.urlencoded({ extended: false }));
 
+// Set up method-override middleware
+app.use(methodOverride('_method'));
+
 //pug middleware
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -22,18 +26,16 @@ app.set('view engine', 'pug');
 const renderRoutes = require('./routes/render.js');
 app.use(renderRoutes);
 
-//Authentication Route
+//Import and use the Authentication Route
 const authRoutes = require("./routes/authRoute.js");
 app.use('/auth', authRoutes);
 
-//home path
-app.get('/', (req, res) => {
-  const pageTitle = 'Home Page';
-  const welcomeMessage = 'Welcome to our website!';
+//Import and use the Book Route
+const bookRoutes = require('./routes/bookRoute.js');
+app.use('/books', bookRoutes);
+
   
   // Render the 'home.pug' template with the provided data
-  res.render('home', { pageTitle, welcomeMessage });
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

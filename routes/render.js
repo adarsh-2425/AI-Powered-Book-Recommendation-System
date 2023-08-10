@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+// Render the home page
+router.get('/', (req, res) => {
+  res.render('home');
+});
+
 // Render the login form
 router.get('/login', (req, res) => {
   res.render('login');
@@ -10,5 +15,10 @@ router.get('/login', (req, res) => {
 router.get('/register', (req, res) => {
   res.render('register');
 });
+
+//update books
+
+
+
 
 module.exports = router;

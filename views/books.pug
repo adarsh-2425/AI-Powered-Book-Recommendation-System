@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Book Recommendation System
+    title All Books
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
@@ -24,8 +24,30 @@ html(lang="en")
             // Add more navigation links as needed
 
     .container.mt-4
-      block content
-
+      h2 All Books
+      table.table.table-bordered
+        thead
+          tr
+            th Title
+            th Author
+            th Genre
+            th Published Year
+            th Created By
+            th Created At
+            th Actions
+        tbody
+          each book in books
+            tr
+              td= book.title
+              td= book.author
+              td= book.genre
+              td= book.publishedYear
+              td= book.createdBy
+              td= book.createdAt
+              td
+                a.btn.btn-info.btn-sm(href=`/books/update/${book._id}`) Update
+                a.btn.btn-danger.btn-sm(href=`/books/delete/${book._id}`) Delete
+          
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js", integrity="sha384-Pzjw5fPlHPwbLdIzVTAjve4s9pOTp6j7R1f3x4Rf+O5n37PzBrz/dcM1J7M+D9U", crossorigin="anonymous")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-pzjw5fPlHPwbLdIzVTAjve4s9pOTp6j7R1f3x4Rf+O5n37PzBrz/dcM1J7M+D9U", crossorigin="anonymous")
